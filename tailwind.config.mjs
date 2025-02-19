@@ -1,3 +1,5 @@
+const { withTV } = require("tailwind-variants/transformer");
+
 /** @type {import('tailwindcss').Config} */
 const tailwindcssConfig = {
   content: [
@@ -17,4 +19,4 @@ const tailwindcssConfig = {
   },
   plugins: [],
 };
-export default tailwindcssConfig;
+export default withTV(tailwindcssConfig);
