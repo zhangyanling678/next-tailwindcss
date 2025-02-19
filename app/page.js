@@ -1,36 +1,47 @@
 "use client";
 
-import { tv } from "tailwind-variants";
+import { twMerge } from "tailwind-merge";
+import { clsx } from "clsx";
+import { cva } from "class-variance-authority";
 
-const button = tv({
-  base: "font-medium bg-blue-500 text-white rounded-full active:opacity-80",
+function cn(...inputs) {
+  return twMerge(clsx(inputs));
+}
+
+const button = cva("rounded p-2", {
   variants: {
-    color: {
-      primary: "bg-blue-500 text-white",
-      secondary: "bg-purple-500 text-white",
+    intent: {
+      default: ["bg-blue-600", "text-white"],
+      primary: ["border", "border-black", "bg-white", "text-black"],
+      dashed: ["border", "border-dashed", "border-black", "bg-white"],
+      link: ["text-blue-600"],
+      text: ["text-black"],
     },
     size: {
-      sm: "text-sm",
-      md: "text-base",
-      lg: "px-4 py-3 text-lg",
+      small: ["px-2", "py-2"],
+      middle: ["px-4", "py-2"],
+      large: ["px-6", "py-2"],
     },
   },
-  compoundVariants: [
-    {
-      size: ["sm", "md"],
-      class: "px-3 py-1",
-    },
-  ],
   defaultVariants: {
-    size: "md",
-    color: "primary",
+    intent: "default",
+    size: "middle",
   },
 });
 
+function Button({ type, size }) {
+  return (
+    <button type="submit" className={button({ intent: type, size })}>
+      Default Button
+    </button>
+  );
+}
+
 export default function Home() {
   return (
-    <button className={button({ size: "sm", color: "secondary" })}>
-      Click me
-    </button>
+    <div className="flex gap-4 p-4">
+      <Button />
+      <Button type="dashed" size="small" />
+    </div>
   );
 }
