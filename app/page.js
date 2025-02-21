@@ -1,12 +1,6 @@
 "use client";
 
-import { twMerge } from "tailwind-merge";
-import { clsx } from "clsx";
 import { cva } from "class-variance-authority";
-
-function cn(...inputs) {
-  return twMerge(clsx(inputs));
-}
 
 const button = cva("rounded p-2", {
   variants: {
@@ -41,7 +35,10 @@ export default function Home() {
   return (
     <div className="flex gap-4 p-4">
       <Button />
+      <Button type="text" />
+      <Button type="link" />
       <Button type="dashed" size="small" />
+      <Button type="primary" size="large" />
     </div>
   );
 }
